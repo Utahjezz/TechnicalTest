@@ -6,6 +6,8 @@ curr_path = os.path.dirname(os.getcwd())
 
 raw_data_path = curr_path + "/raw_data/"
 
+raw_neg_data_path = curr_path + "/raw_neg_data"
+
 compressed_data_path = curr_path + "/compressed_data/"
 
 temp_data_path = curr_path + "/temp"
@@ -29,3 +31,5 @@ classifier_check_status_before_classification = True
 classifier_status_training = "training"
 classifier_status_ready = "ready"
 classifier_status_failed = "failed"
+
+build_negative_set = False

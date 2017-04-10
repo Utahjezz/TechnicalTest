@@ -1,5 +1,6 @@
 import csv
 import sys
+import config.config as config
 from random import shuffle
 
 from client.img_rest_client import DownloaderThread
@@ -31,7 +32,7 @@ def readingFromInputFile(csvFile):
     return allImages
 
 
-classes = []
+classes = [] # list of classes
 
 
 def countClasses(elements):
@@ -46,7 +47,7 @@ def splittingCondition(setClass, elClass):
     return setClass == elClass;
 
 
-elementsByClassDict = {}
+elementsByClassDict = {} # { "className" : InputImgElement}
 
 
 def splittingElementsByClass(elements, classes):
@@ -57,7 +58,7 @@ def splittingElementsByClass(elements, classes):
         elementsByClassDict[imgClass] = subSet
 
 
-filteredElementsByClassDict = {}
+filteredElementsByClassDict = {} # { "className" : InputImgElement[]}
 
 
 def shuffleElements(elements):
@@ -70,20 +71,35 @@ def selectingNElementsForClass(classes, elementsByClassDict, numberOfClassElemen
         shuffleElements(elementsByClassDict[imgClass])
         filteredElementsByClassDict[imgClass] = elementsByClassDict[imgClass][:numberOfClassElements]
         print "Selected", numberOfClassElements, "random elements for class ", imgClass
+        # if config.build_negative_set:
+            # selectingNElementRandomlyForNegativeSet(imgClass, allElements, numberOfClassElements)
 
+def selectingNElementRandomlyForNegativeSet(imgClass, elements, numberOfNegElements):
+    # this function will work as the previous one but for negative samples
+    print "Negative values TODO"
+    # allNegElements = shuffle(numberOfNegElements)[:numberOfNegElements]
 
 allElements = []
+
+#allNegElements = []
 
 # start the script, it reads from the csv file then split the images based on assigned classes, randomly selects n of them for their class
 # finally it starts nClasses threads in order to improve the downloading task required time of execution (a fixed number of threads based
 # on the local CPUs capabilities will be more effective)
-def init_pre_processing(numberOfClassElements, csvFile):
+def init_pre_processing(numberOfClassElements, csvFile): # it could be specified a negative example csv file (numberOfClassElements, csvFile, negCsvFile)
     allElements = readingFromInputFile(csvFile)
+
+    if config.build_negative_set:
+        print "It should be modified in order to take neg samples as input"
+        # allNegElements = readingFromInputFile(negCsvFile)
     nClasses = countClasses(allElements)
     splittingElementsByClass(allElements, classes)
 
     selectingNElementsForClass(classes, elementsByClassDict, numberOfClassElements)
     threads = []
+    # negThread = DownloaderThread(-1, "Thread-" + "Neg", "negative_samples", allNegElements)
+    # negThread.start()
+    # threads.append(negThread)
     for idx, imgClass in enumerate(classes):
         thread = DownloaderThread(idx, "Thread-" + imgClass, imgClass, filteredElementsByClassDict[imgClass])
         thread.start()
