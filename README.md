@@ -74,10 +74,47 @@ POST http://localhost:8000/api/CustomClassifier/classify
 Request JSON body
 ```json
 {
-	"imageId": "46370982ql"
+	"imageId": "46370982ql",
+	"threshold": 0.4
 }
 ```
 Response JSON Object
 ```json
-
+{
+  "images": [
+    {
+      "image": "/Users/giacomogezzi/Documents/Yoox/TechnicalTest/temp/46370982ql.jpg",
+      "classifiers": [
+        {
+          "classes": [
+            {
+              "score": 0.999703,
+              "class": "accessories"
+            },
+            {
+              "score": 0.819241,
+              "class": "jewelry"
+            },
+            {
+              "score": 0.990598,
+              "class": "suits_and_jackets"
+            },
+            {
+              "score": 0.854528,
+              "class": "sweaters"
+            },
+            {
+              "score": 0.996603,
+              "class": "underwear"
+            }
+          ],
+          "classifier_id": "TechnicalTestClassifier_937605586",
+          "name": "TechnicalTestClassifier"
+        }
+      ]
+    }
+  ],
+  "custom_classes": 16,
+  "images_processed": 1
+}
 ```
