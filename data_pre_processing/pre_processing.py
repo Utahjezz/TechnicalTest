@@ -74,7 +74,9 @@ def selectingNElementsForClass(classes, elementsByClassDict, numberOfClassElemen
 
 allElements = []
 
-
+# start the script, it reads from the csv file then split the images based on assigned classes, randomly selects n of them for their class
+# finally it starts nClasses threads in order to improve the downloading task required time of execution (a fixed number of threads based
+# on the local CPUs capabilities will be more effective)
 def init_pre_processing(numberOfClassElements, csvFile):
     allElements = readingFromInputFile(csvFile)
     nClasses = countClasses(allElements)
@@ -90,6 +92,7 @@ def init_pre_processing(numberOfClassElements, csvFile):
         t.join()
     print "Pre-processing python script completed! ============================>"
 
+# it could be run standalone for offline data preparation to feed the classifier
 if __name__ == '__main__':
     print "<============================ Pre-processing python script started with args: ", sys.argv
     if (len(sys.argv) < 3):
