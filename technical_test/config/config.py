@@ -6,7 +6,7 @@ curr_path = os.path.dirname(os.getcwd())
 
 raw_data_path = curr_path + "/raw_data/"
 
-raw_neg_data_path = curr_path + "/raw_neg_data"
+raw_neg_data_path = curr_path + "/raw_neg_data/"
 
 compressed_data_path = curr_path + "/compressed_data/"
 

@@ -24,7 +24,7 @@ class CustomClassifier():
     @type inputDataPath: string
     @param inputDataPath: zip files directory path
     """
-    def create_custom_classifier(self, classifierName, inputDataPath):
+    def create_custom_classifier(self, classifierName, inputDataPath): # it could take a negative examples data path as input
         params = {}
         for dirname, subdirs, files in os.walk(inputDataPath):
             for file in files:
@@ -33,6 +33,12 @@ class CustomClassifier():
                 params[name.replace("-", "_") + "_positive_examples"] = open(absname)
         if config.print_file_params_long_object:
             print params
+
+        # for dirname, subdirs, files in os.walk(negDataPath):
+        #     for file in files:
+        #         absname = os.path.abspath(os.path.join(dirname, file))
+        #         name = os.path.splitext(os.path.basename(file))[0]
+        #         params["negative_examples"] = open(absname)
 
         print "Uploading files to Visual Recognition servers... It will take several time based on the number of images"
         response = self.visual_recognition.create_classifier(classifierName, **params)
