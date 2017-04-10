@@ -65,7 +65,8 @@ class CustomClassifier():
     @param classifier_id: classifier id
     """
     def recharge_classifier(self, classifier_id):
-        self.classifier_id = classifier_id
+        # if the classifier does not exist it will fail
+        self.classifier_id = self.getClassifiers(classifier_id)['classifier_id']
 
     """
     This method requests to the classifier for an image classification starting from its ID
