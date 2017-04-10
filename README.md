@@ -24,10 +24,10 @@ the requirements.txt file is contained in the git repo.
 ### Run it (new custom classifier)
 
 ```sh
-(venv) $ gunicorn -b 0.0.0.0:8000 'rest_app:init_new_classifier("/training_set.csv", 200)' --log-config logging.conf --reload --timeout 18000
+(venv) $ gunicorn -b 0.0.0.0:8000 'rest_app:init_new_classifier("../training_set.csv", 200)' --log-config logging.conf --reload --timeout 18000
 ```
 
-1) First param is the csv file path on the local machine
+1) First param is the csv file path on the local machine (the example will take the provided csv of the git repo)
 2) It is the configurable number of images to be randomly selected for the resulting training set
 
 A gunicorn server will run on the 8000 (or else) port of the machine
@@ -35,11 +35,11 @@ A gunicorn server will run on the 8000 (or else) port of the machine
 ### Run it (from existing custom classifier)
 
 ```sh
-(venv) $ gunicorn -b 0.0.0.0:8000 'rest_app:recharge_classifier("TechnicalTestClassifier_937605586", "/training_set.csv")' --log-config logging.conf --reload --timeout 1800
+(venv) $ gunicorn -b 0.0.0.0:8000 'rest_app:recharge_classifier("TechnicalTestClassifier_937605586", "../training_set.csv")' --log-config logging.conf --reload --timeout 1800
 ```
 
 1) The Watson Visual Recognition custom classifier ID to be recharge
-2) the csv file path on the local machine (file format "id", "className")
+2) the csv file path on the local machine (file format "id", "className") (the example will take the provided csv of the git repo)
 
 A gunicorn server will run on the 8000 (or else) port of machine
 
