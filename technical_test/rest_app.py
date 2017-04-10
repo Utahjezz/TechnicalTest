@@ -28,7 +28,7 @@ def init_new_classifier(csvFile, numberOfClassElements):
 
     return initialize_rest_app(customClassifier)
 
-# start script EXISTING_CLASSIFIER: e.g. gunicorn -b 0.0.0.0:8000 'rest_app:recharge_classifier("TechnicalTestClassifier_937605586")' --log-config logging.conf --reload --timeout 1800
+# start script EXISTING_CLASSIFIER: e.g. gunicorn -b 0.0.0.0:8000 'rest_app:recharge_classifier("TechnicalTestClassifier_937605586", "/training_set.csv")' --log-config logging.conf --reload --timeout 1800
 
 """
 Init REST App with an existing classifier (e.g.: TechnicalTestClassifier_937605586). it is possible to find this ID
