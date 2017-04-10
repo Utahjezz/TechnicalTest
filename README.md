@@ -61,8 +61,8 @@ Response JSON object
     },
     {
       "class": "tops__tees"
-    }
-    // ...
+    }], //...
+    "owner": "8061b0f5-86ad-4b25-8f07-313c5e01e57c",
   "classifier_id": "TechnicalTestClassifier_937605586"
 }
 ```
