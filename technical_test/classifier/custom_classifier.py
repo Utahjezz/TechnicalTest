@@ -73,7 +73,7 @@ class CustomClassifier():
     @param imageId: an image ID contained in the csv training set file
     @return: the visual recognition representation of the requested image classification
     """
-    def classify_image(self, imageId):
+    def classify_image(self, imageId, threshold):
         # Read the CSV File
         allImages = pre_processing.readingFromInputFile(config.csv_path)
         # in a production env it should be necessary to handle the not found exception
@@ -84,7 +84,7 @@ class CustomClassifier():
         # Download the image
         imgPath = self.downloader.downloadAndSaveImage(config.temp_data_path, imgEl)
         print "Sending classification request to classifier"
-        return self.visual_recognition.classify(open(imgPath), classifier_ids=[self.classifier_id])
+        return self.visual_recognition.classify(open(imgPath), classifier_ids=[self.classifier_id], threshold=threshold)
 
 
 # create_custom_classifier("TechnicalTest", config.compressed_data_path)

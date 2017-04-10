@@ -19,8 +19,10 @@ class ClassifierResource():
     def on_post(self, req, resp):
         try:
             proceed = True
+            # Input params : { "imageId": "xyz", "threshold" : 0.8}
             logging.info("POST request for classification " + json.dumps(req.context['doc']))
             imageId = req.context['doc']['imageId']
+            threshold = req.context['doc']['threshold']
 
             # if active it will check the classifier status before proceeding with the classification
             if config.classifier_check_status_before_classification:
@@ -28,7 +30,7 @@ class ClassifierResource():
                 proceed = status == "ready"
 
             if proceed:
-                response = json.dumps(self.classifier.classify_image(imageId))
+                response = json.dumps(self.classifier.classify_image(imageId=imageId, threshold=threshold))
                 logging.info("result of classification " + response)
                 resp.status = "200"
             else:
