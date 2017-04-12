@@ -76,7 +76,7 @@ class CustomClassifier():
         self.classifier_id = self.getClassifiers(classifier_id)['classifier_id']
 
     """
-    This method requests to the classifier for an image classification starting from its ID
+    This method requests to the classifier for an image classification starting from an image ID of the csv file
     @type imageId: string
     @param imageId: an image ID contained in the csv training set file
     @return: the visual recognition representation of the requested image classification
@@ -94,6 +94,12 @@ class CustomClassifier():
         print "Sending classification request to classifier"
         return self.visual_recognition.classify(open(imgPath), classifier_ids=[self.classifier_id], threshold=threshold)
 
+    """
+    This method requests to the classifier for an image classification starting from its ID
+    @type imageId: string
+    @param imageId: an image ID contained in the csv training set file
+    @return: the visual recognition representation of the requested image classification
+    """
     def classify_image(self, imageId, threshold):
         imgPath = self.downloader.downloadAndSaveImage(config.temp_data_path, InputImgElement(imageId))
         print "Sending classification request to classifier"
