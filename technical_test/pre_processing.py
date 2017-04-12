@@ -7,7 +7,7 @@ from client.img_rest_client import DownloaderThread
 
 
 class InputImgElement:
-    def __init__(self, id, imgClass):
+    def __init__(self, id, imgClass = None):
         self.id = id
         self.imgClass = imgClass
 
@@ -16,7 +16,6 @@ class InputImgElement:
 
     def __repr__(self):
         return self.__str__()
-
 
 def readingFromInputFile(csvFile):
     allImages = []

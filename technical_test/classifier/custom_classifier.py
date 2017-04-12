@@ -6,6 +6,7 @@ from watson_developer_cloud import VisualRecognitionV3 as VisualRecognition
 import config.config as config
 import pre_processing
 from client.img_rest_client import ImageDownloader
+from pre_processing import InputImgElement
 
 """
 The CustomClassifier class is a wrapper for Watson Visualization Recognition API
@@ -80,7 +81,7 @@ class CustomClassifier():
     @param imageId: an image ID contained in the csv training set file
     @return: the visual recognition representation of the requested image classification
     """
-    def classify_image(self, imageId, threshold):
+    def classify_image_fromTrainingSet(self, imageId, threshold):
         # Read the CSV File
         allImages = pre_processing.readingFromInputFile(config.csv_path)
         # in a production env it should be necessary to handle the not found exception
@@ -93,6 +94,10 @@ class CustomClassifier():
         print "Sending classification request to classifier"
         return self.visual_recognition.classify(open(imgPath), classifier_ids=[self.classifier_id], threshold=threshold)
 
+    def classify_image(self, imageId, threshold):
+        imgPath = self.downloader.downloadAndSaveImage(config.temp_data_path, InputImgElement(imageId))
+        print "Sending classification request to classifier"
+        return self.visual_recognition.classify(open(imgPath), classifier_ids=[self.classifier_id], threshold=threshold)
 
 # create_custom_classifier("TechnicalTest", config.compressed_data_path)
 # classifier = CustomClassifier()
